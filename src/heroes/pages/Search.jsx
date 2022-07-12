@@ -6,10 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { getHeroByName } from "../helpers/getHeroByName";
 
 const SignupSchema = Yup.object().shape({
-    heroe: Yup.string()
-        .min(2, "Muy corto")
-        .max(20, "Muy largo")
-        .required("Dato requerido"),
+    heroe: Yup.string().max(20, "Muy largo").required("Dato requerido"),
 });
 
 const Search = () => {
@@ -17,8 +14,10 @@ const Search = () => {
     const location = useLocation();
 
     const { q = "" } = queryString.parse(location.search);
-
     const heroes = getHeroByName(q);
+
+    const showSearch = q.length === 0;
+    const showError = !showSearch && heroes.length === 0;
 
     return (
         <>
@@ -65,13 +64,19 @@ const Search = () => {
                 <div className="col-7">
                     <h4>Result</h4>
                     <hr />
-                    <div className="alert alert-success">Buscar heroe</div>
+                    <div
+                        className="alert alert-success animate__animated animate__fadeIn"
+                        style={{ display: !showSearch && "none" }}
+                    >
+                        Buscar heroe
+                    </div>
 
-                    {heroes.length === 0 && (
-                        <div className="alert alert-danger">
-                            No hay resultados en la busqueda de <b>{q}</b>
-                        </div>
-                    )}
+                    <div
+                        className="alert alert-danger animate__animated animate__fadeIn"
+                        style={{ display: !showError && "none" }}
+                    >
+                        No hay resultados en la busqueda de <b>{q}</b>
+                    </div>
 
                     {heroes.map((hero) => (
                         <HeroCard key={hero.id} {...hero} />
