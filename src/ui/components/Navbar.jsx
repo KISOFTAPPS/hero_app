@@ -1,16 +1,29 @@
+import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../auth/context/AuthContext";
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext);
+    const userName = user.name;
+
     const navigate = useNavigate();
 
     const handleLogout = (e) => {
         e.preventDefault();
 
+        let user = localStorage.getItem("user");
+        if (user) {
+            logout();
+        }
+        
         navigate("login", { replace: true });
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={{zIndex:"1"}}>
+        <nav
+            className="navbar navbar-expand-lg navbar-dark bg-dark"
+            style={{ zIndex: "1" }}
+        >
             <div className="container-fluid">
                 <b className="navbar-brand">Empresas</b>
                 <button
@@ -40,14 +53,16 @@ const Navbar = () => {
                             Heroes
                         </NavLink>
                     </div>
-                    <span className="navbar-text me-3 text-primary">
-                        Usuario
+                    <span className="navbar-text me-3 text-success">
+                        {userName}
                     </span>
                     <button
-                        className="btn btn-danger"
+                        className={`btn btn-outline-${
+                            userName ? "danger" : "success"
+                        }`}
                         onClick={handleLogout}
                     >
-                        Salir
+                        {userName ? "Logout" : "Login"}
                     </button>
                 </div>
             </div>

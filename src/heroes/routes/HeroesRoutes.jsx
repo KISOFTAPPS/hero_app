@@ -22,6 +22,18 @@ const Layout = () => {
     );
 };
 
+const Error404 = () => {
+    return (
+        <>
+            <div className="container">
+                <div className="d-flex flex-row justify-content-center alig-items-center">
+                    <h1>404</h1>
+                </div>
+            </div>
+        </>
+    );
+};
+
 const HeroesRoutes = () => {
     return (
         <>
@@ -33,6 +45,7 @@ const HeroesRoutes = () => {
                     <Route path="search" element={<Search />} />
                     <Route path="hero/:id" element={<Heroes />} />
                 </Route>
+                <Route path="*" element={<Error404 />} />
             </Routes>
         </>
     );
