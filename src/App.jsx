@@ -2,11 +2,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 
 import RouterApp from "./router/RouterApp";
+import AuthProvider from "./auth/context/AuthProvider";
 
 const App = () => {
     return (
         <>
-            <RouterApp />
+            <AuthProvider>
+                <RouterApp />
+            </AuthProvider>
         </>
     );
 };
