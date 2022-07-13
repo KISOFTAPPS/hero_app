@@ -25,10 +25,11 @@ const Layout = () => {
 const Error404 = () => {
     return (
         <>
-            <div className="container">
-                <div className="d-flex flex-row justify-content-center alig-items-center">
-                    <h1>404</h1>
-                </div>
+            <div style={{ textAlign: "center" }}>
+                <h4 style={{ lineHeight: "100vh" }}>
+                    <span style={{ fontWeight: "bold" }}>Error 404.</span> No
+                    hemos podido encontrar la pagina que buscas.
+                </h4>
             </div>
         </>
     );

@@ -7,7 +7,6 @@ import Navbar from "../ui/components/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
-
 const RouterApp = () => {
     return (
         <Routes>

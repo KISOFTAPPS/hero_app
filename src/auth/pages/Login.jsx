@@ -8,10 +8,12 @@ const Login = () => {
     const navigate = useNavigate()
 
     const handleLogin = () => {
+
+        const lastPath = localStorate.getItem("lastPath")  || "/";
         
         login("Karim Sabag")
 
-        navigate("/", { replace: true })
+        navigate(lastPath, { replace: true })
     }
 
 
